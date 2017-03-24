@@ -37,7 +37,7 @@ router.get('/ongkir', function(req, res, next) {
         let temp = {
           id: instance.id,
           kota: instance.kota,
-          biaya: currencyFormat(instance.biaya)
+          biaya: currencyFormatRp(instance.biaya)
         };
         array.push(temp);
       })
@@ -119,7 +119,7 @@ router.get('/products', function(req, res, next) {
         let temp = {
           id: instance.id,
           nama: instance.nama,
-          harga: currencyFormat(instance.harga),
+          harga: currencyFormatRp(instance.harga),
           berat: currencyFormat(instance.berat),
           img_url: instance.img_url
         };
@@ -187,12 +187,12 @@ router.get('/transaction', function(req, res, next) {
               email: instance.email,
         kota: instance.kota,
                 telepon: instance.telepon,
-                ongkir: currencyFormat(instance.ongkir),
+                ongkir: currencyFormatRp(instance.ongkir),
                 total_berat: instance.total_berat,
                 total_harga: instance.total_harga,
                 no_resi: instance.no_resi,
           totalBeratFormat: currencyFormat(instance.total_berat),
-          totalHargaFormat: currencyFormat(instance.total_harga),
+          totalHargaFormat: currencyFormatRp(instance.total_harga),
           createdAt: formatDate(instance.createdAt)
         };
         array.push(temp);
@@ -215,12 +215,12 @@ router.get('/transaction/resi/:id', function(req, res, next) {
       kota: instance.kota,
               telepon: instance.telepon,
               note: instance.note,
-              ongkir: currencyFormat(instance.ongkir),
+              ongkir: currencyFormatRp(instance.ongkir),
               total_berat: instance.total_berat,
               total_harga: instance.total_harga,
               no_resi: instance.no_resi,
         totalBeratFormat: currencyFormat(instance.total_berat),
-        totalHargaFormat: currencyFormat(instance.total_harga)
+        totalHargaFormat: currencyFormatRp(instance.total_harga)
       }
       res.render('admin-transaction-resi', {title: 'No Resi Input', transText: t});
     })
@@ -255,12 +255,12 @@ router.get('/transaction/edit/:id', function(req, res, next) {
       kota: instance.kota,
               telepon: instance.telepon,
               note: instance.note,
-              ongkir: currencyFormat(instance.ongkir),
+              ongkir: currencyFormatRp(instance.ongkir),
               total_berat: instance.total_berat,
               total_harga: instance.total_harga,
               no_resi: instance.no_resi,
         totalBeratFormat: currencyFormat(instance.total_berat),
-        totalHargaFormat: currencyFormat(instance.total_harga)
+        totalHargaFormat: currencyFormatRp(instance.total_harga)
       }
       res.render('admin-transaction-edit', {title: 'No Resi Input', transText: t});
     })
@@ -301,7 +301,7 @@ router.get('/transaction/view/:id', function(req, res, next) {
             nama: x.Product.nama,
             id: x.ProductId,
             berat: currencyFormat(x.Product.berat),
-            harga: currencyFormat(x.harga)
+            harga: currencyFormatRp(x.harga)
           };
           totalBerat += x.Product.berat;
           cart.push(temp);
@@ -309,9 +309,9 @@ router.get('/transaction/view/:id', function(req, res, next) {
         let totalOngkir = Math.ceil(totalBerat/1000) * trans.ongkir;
         let totalAll = trans.total_harga + totalOngkir;
         res.render('admin-transaction-view', {title: 'View Transaction', transText: trans,
-                    cartText: cart, totalHargaText:currencyFormat(trans.total_harga),
-                  totalOngkirText: currencyFormat(totalOngkir),
-                totalAllText: currencyFormat(totalAll), totalBeratText: currencyFormat(totalBerat) });
+                    cartText: cart, totalHargaText:currencyFormatRp(trans.total_harga),
+                  totalOngkirText: currencyFormatRp(totalOngkir),
+                totalAllText: currencyFormatRp(totalAll), totalBeratText: currencyFormat(totalBerat) });
       })
       .catch((err)=>{
         res.send(err.message);
@@ -319,8 +319,19 @@ router.get('/transaction/view/:id', function(req, res, next) {
   })
 });
 
+router.get('/transaction/report', function(req, res, next) {
+  models.ProductTransaction.productSold().then((x)=>{
+    console.log(x);
+  })
+});
+
+
 function currencyFormat(value){
   return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+}
+
+function currencyFormatRp(value){
+  return 'Rp '+ value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 }
 
 function formatDate(value){

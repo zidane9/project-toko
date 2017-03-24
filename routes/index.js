@@ -17,14 +17,14 @@ router.get('/', function(req, res, next) {
           let temp = {
             id: instance.id,
             nama: instance.nama,
-            harga: currencyFormat(instance.harga),
+            harga: currencyFormatRp(instance.harga),
             berat: currencyFormat(instance.berat),
             img_url: instance.img_url
           };
           array.push(temp);
         })
         res.render('index', { title: 'Ridho and Darren Online Shop' , productsText: array,
-                              cartText: cart, totalHargaText: currencyFormat(totalHarga)});
+                              cartText: cart, totalHargaText: currencyFormatRp(totalHarga)});
       })
       .catch((err)=>{
         res.send(err.message);
@@ -55,7 +55,7 @@ router.get('/addCart/:id', function(req, res, next) {
         nama: instance.nama,
         harga: instance.harga,
         berat: instance.berat,
-        hargaFormat: currencyFormat(instance.harga),
+        hargaFormat: currencyFormatRp(instance.harga),
         quantity: 1
       }
       totalHarga += temp.harga;
@@ -92,7 +92,7 @@ router.get('/checkout', function(req, res, next) {
         array.push(temp);
       })
       res.render('checkout', { title: 'Ridho and Darren Online Shop' , ongkirText:array,
-                            cartText: cart, totalHargaText: currencyFormat(totalHarga)});
+                            cartText: cart, totalHargaText: currencyFormatRp(totalHarga)});
     })
     .catch((err)=>{
       res.send(err.message);
@@ -141,9 +141,9 @@ router.post('/checkout', function(req, res, next) {
             totalHarga = 0;
             cart = [];
             res.render('checkout-success', { title: 'Checkout' , namaText: trans.nama,
-                                  idText: trans.id, totalHargaText: currencyFormat(totalExOngkir),
-                                beratText: currencyFormat(totalBerat), ongkirText: currencyFormat(charge.biaya),
-                              totalText:currencyFormat(total)});
+                                  idText: trans.id, totalHargaText: currencyFormatRp(totalExOngkir),
+                                beratText: currencyFormat(totalBerat), ongkirText: currencyFormatRp(charge.biaya),
+                              totalText:currencyFormatRp(total)});
           })
         })
     })
