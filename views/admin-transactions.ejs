@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+      <table border=1>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nama</th>
+            <th>Email</th>
+            <th>Kota</th>
+            <th>Telepon</th>
+            <th>Berat</th>
+            <th>Ongkir</th>
+            <th>Total Harga</th>
+            <th>No Resi</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+          <% for(var i=0;i<transText.length;i++){ %>
+            <tr>
+              <td><%= transText[i].id %></td>
+              <td><%= transText[i].nama %></td>
+              <td><%= transText[i].email %></td>
+              <td><%= transText[i].kota %></td>
+              <td><%= transText[i].telepon %></td>
+              <td><%= transText[i].totalBeratFormat %></td>
+              <td><%= transText[i].ongkir %></td>
+              <td><%= transText[i].totalHargaFormat %></td>
+              <td>
+                <% if(transText[i].no_resi){ %>
+                  <%= transText[i].no_resi %>
+                <% } else { %>
+                  <a href="/admin/transaction/resi/<%= transText[i].id %>">isi no resi</a>
+                <% } %>
+              </td>
+              <td>
+                <a href="/admin/transaction/edit/<%= transText[i].id %>">Edit</a>
+              </td>
+            </tr>
+            <% } %>
+        </tbody>
+      </table>
+  </body>
+</html>

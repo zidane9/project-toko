@@ -3,9 +3,71 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+      nav {
+        float: right;
+        max-width: 220px;
+        margin: 0;
+        padding: 1;
+      }
+    </style>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <center><h1><%= title %></h1></center>
+    <nav >
+      <h3>Cart</h3>
+      <table border=1>
+        <thead>
+          <tr>
+            <th>Jumlah</th>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+          <% for(var i=0;i<cartText.length;i++){ %>
+            <tr>
+            <td><%= cartText[i].quantity %></td>
+              <td><%= cartText[i].nama %></td>
+              <td><%= cartText[i].hargaFormat %></td>
+              <td>
+                <a href="/removeCart/<%= cartText[i].id %>">Remove</a>
+              </td>
+            </tr>
+            <% } %>
+        </tbody>
+      </table>
+      <div> Total : <%= totalHargaText %> </div>
+      <form method="post">
+      <button type="submit">Checkout</button>
+    </form>
+    </nav>
+
+      <table border=1>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Image</th>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>Berat</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+          <% for(var i=0;i<productsText.length;i++){ %>
+            <tr>
+              <td><%= productsText[i].id %></td>
+              <td><img src="<%= productsText[i].img_url %>" height="100" width="150"></td>
+              <td><%= productsText[i].nama %></td>
+              <td><%= productsText[i].harga %></td>
+              <td><%= productsText[i].berat %></td>
+              <td>
+                <a href="/addCart/<%= productsText[i].id %>">Add to cart</a>
+              </td>
+            </tr>
+            <% } %>
+        </tbody>
+      </table>
+
   </body>
 </html>

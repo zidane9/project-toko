@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <a href="/admin/ongkir/new">Add</a>
+    <br>
+      <table border=1>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Kota</th>
+            <th>Biaya</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+          <% for(var i=0;i<ongkirText.length;i++){ %>
+            <tr>
+              <td><%= ongkirText[i].id %></td>
+              <td><%= ongkirText[i].kota %></td>
+              <td><%= ongkirText[i].biaya %></td>
+              <td>
+                <a href="/admin/ongkir/edit/<%= ongkirText[i].id %>">Edit</a> <a href="/admin/ongkir/delete/<%= ongkirText[i].id %>" onClick="return confirm('Are you sure you want to delete this ongkir?')">Delete</a>
+              </td>
+            </tr>
+            <% } %>
+        </tbody>
+      </table>
+  </body>
+</html>

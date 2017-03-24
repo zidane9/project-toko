@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+      nav {
+        float: right;
+        max-width: 220px;
+        margin: 0;
+        padding: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <form method="post">
+    <nav >
+      <h3>Cart</h3>
+      <table border=1>
+        <thead>
+          <tr>
+            <th>Jumlah</th>
+            <th>Nama</th>
+            <th>Harga</th>
+        </thead>
+        <tbody>
+          <% for(var i=0;i<cartText.length;i++){ %>
+            <tr>
+            <td><%= cartText[i].quantity %></td>
+              <td><%= cartText[i].nama %></td>
+              <td><%= cartText[i].hargaFormat %></td>
+            </tr>
+            <% } %>
+        </tbody>
+      </table>
+      <div> Total : <%= totalHargaText %> </div>
+      <button type="submit">Confirm</button>
+    </nav>
+
+      <h3>Data Customer</h3>
+      <table>
+        <tr>
+          <td>Nama :</td>
+          <td><input type="text" name="namaNew"></td>
+        </tr>
+          <tr>
+            <td>Email :</td>
+            <td><input type="text" name="emailNew"></td>
+          </tr>
+            <tr>
+              <td>Alamat :</td>
+              <td><input type="text" name="alamatNew"></td>
+            </tr>
+              <tr>
+                <td>Kota :</td>
+                <td>
+                  <select name="kotaNew">
+                    <% for(var i=0;i<ongkirText.length;i++){ %>
+                   <option value="<%= ongkirText[i].id%>"><%= ongkirText[i].kota %></option>
+                   <% } %>
+                 </select>
+                </td>
+              </tr>
+                <tr>
+                  <td>Telepon :</td>
+                  <td><input type="text" name="teleponNew"></td>
+                </tr>
+                  <tr>
+                    <td>Note :</td>
+                    <td><textarea name="noteNew"></textarea></td>
+                  </tr>
+      </table>
+    </form>
+  </body>
+</html>
