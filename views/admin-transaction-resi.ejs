@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <form method="post">
+      <table >
+
+            <tr>
+              <td>Id :</td>
+              <td><input type="text" disabled="true" name="idNew" value="<%= transText.id %>"></td>
+</tr>
+<tr>
+                <td>Nama :</td>
+                <td><input type="text" disabled="true" value="<%= transText.nama %>"></td>
+              </tr>
+              <tr>
+                  <td>Email :</td>
+                  <td><input type="text" disabled="true" value="<%= transText.email %>"></td>
+                </tr>
+                <tr>
+                    <td>Alamat :</td>
+                    <td><textarea disabled="true" ><%= transText.alamat %></textarea></td>
+                  </tr>
+                  <tr>
+                      <td>Kota :</td>
+                      <td><input type="text" disabled="true" value="<%= transText.kota %>"></td>
+            </tr>
+            <tr>
+                <td>Telepon :</td>
+                <td><input type="text" disabled="true" value="<%= transText.telepon %>"></td>
+              </tr>
+              <tr>
+                  <td>Note :</td>
+                  <td><textarea disabled="true" ><%= transText.note %></textarea></td>
+                </tr>
+                <tr>
+                    <td>Ongkir :</td>
+                    <td><input type="text" disabled="true" value="<%= transText.ongkir %>"></td>
+                  </tr>
+                  <tr>
+                      <td>Berat :</td>
+                      <td><input type="text" disabled="true" value="<%= transText.totalBeratFormat %>"></td>
+                    </tr>
+                    <tr>
+                        <td>Total Harga :</td>
+                        <td><input type="text" disabled="true" value="<%= transText.totalHargaFormat %>"></td>
+                      </tr>
+                      <tr>
+                          <td>No Resi :</td>
+                          <td><input type="text" name="resiNew"></td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td><button type="submit">Update resi</button></td>
+                        </tr>
+
+      </table>
+    </form>
+
+  </body>
+  </html>

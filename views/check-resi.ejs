@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+  </head>
+  <body>
+    <h1><%= title %> </h1>
+    <table border="1">
+      <thead>
+        <tr>
+          <td>Id Transaksi</td>
+          <td>Tanggal Transaksi</td>
+          <td>Nama</td>
+          <td>No Resi</td>
+    	</tr>
+    </thead>
+    <tbody>
+      <% for(var i=0;i<transText.length;i++){ %>
+        <tr>
+          <td><%= transText[i].id %></td>
+          <td><%= transText[i].tanggal %></td>
+          <td><%= transText[i].nama %></td>
+          <td><%= transText[i].no_resi %></td>
+
+        </tr>
+        <% } %>
+    </tbody>
+      </table>
+    <a href="/">Back to shopping</a>
+  </body>
+</html>

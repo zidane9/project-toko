@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <form method="post">
+      <table>
+        <tr>
+          <td>Id :</td>
+          <td><input type="text" name="idNew" value="<%= idText %>"></td>
+        </tr>
+        <tr>
+          <td>Nama :</td>
+          <td><textarea name="namaNew"><%= namaText %></textarea></td>
+        </tr>
+          <tr>
+            <td>Harga :</td>
+            <td><input type="text" name="hargaNew" value="<%= hargaText %>"></td>
+          </tr>
+        <tr>
+          <td>Berat :</td>
+          <td><input type="text" name="beratNew" value="<%= beratText %>"></td>
+        </tr>
+          <tr>
+            <td>Image URL :</td>
+            <td><input type="text" name="imgNew" value="<%= imgText %>"></td>
+          </tr>
+            <tr>
+              <td></td>
+              <td><button type="submit">Update</button></td>
+            </tr>
+      </table>
+    </form>
+  </body>
+</html>
