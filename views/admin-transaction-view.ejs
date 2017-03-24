@@ -6,7 +6,7 @@
     <style>
       nav {
         float: right;
-        max-width: 220px;
+        max-width: 300px;
         margin: 0;
         padding: 1;
       }
@@ -31,14 +31,17 @@
             <tr>
             <td><%= cartText[i].quantity %></td>
               <td><%= cartText[i].nama %></td>
-              <td><%= cartText[i].hargaFormat %></td>
+                <td><%= cartText[i].id %></td>
+                  <td><%= cartText[i].berat %></td>
+              <td><%= cartText[i].harga %></td>
             </tr>
             <% } %>
         </tbody>
+
       </table>
       <div> Total harga : <%= totalHargaText %> </div>
-      <div> Ongkir : <%= totalHargaText %> </div>
-      <div> Total yang harus dibayar : <%= totalHargaText %> </div>
+      <div> Total Ongkir : <%= totalOngkirText %> </div>
+      <div> Total yang harus dibayar : <%= totalAllText %> </div>
     </nav>
 
       <h3>Data Customer</h3>
@@ -79,11 +82,11 @@
                         </tr>
                         <tr>
                             <td>Berat :</td>
-                            <td><input type="text" disabled="true" value="<%= transText.totalBeratFormat %>"></td>
+                            <td><input type="text" disabled="true" value="<%= totalBeratText %>"></td>
                           </tr>
                           <tr>
                               <td>Total Harga :</td>
-                              <td><input type="text" disabled="true" value="<%= transText.totalHargaFormat %>"></td>
+                              <td><input type="text" disabled="true" value="<%= totalHargaText %>"></td>
                             </tr>
                             <tr>
                                 <td>No Resi :</td>

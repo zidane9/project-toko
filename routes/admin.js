@@ -3,7 +3,7 @@
 var express = require('express');
 var router = express.Router();
 let models = require('../models');
-
+let moment = require('moment');
 
 /* GET admin page. */
 router.get('/', function(req, res, next) {
@@ -192,7 +192,8 @@ router.get('/transaction', function(req, res, next) {
                 total_harga: instance.total_harga,
                 no_resi: instance.no_resi,
           totalBeratFormat: currencyFormat(instance.total_berat),
-          totalHargaFormat: currencyFormat(instance.total_harga)
+          totalHargaFormat: currencyFormat(instance.total_harga),
+          createdAt: formatDate(instance.createdAt)
         };
         array.push(temp);
       })
@@ -286,9 +287,34 @@ router.post('/transaction/edit/:id', function(req, res, next) {
 router.get('/transaction/view/:id', function(req, res, next) {
   models.Transaction.findById(req.params.id)
   .then((trans)=>{
-    trans.getProductTransactions()
+    trans.getProductTransactions({
+      include: [{
+        model: models.Product
+    }]
+    })
       .then((pt)=>{
-        console.log(pt);
+      let cart = [];
+      let totalBerat = 0;
+        pt.forEach((x)=>{
+          let temp = {
+            quantity: x.quantity,
+            nama: x.Product.nama,
+            id: x.ProductId,
+            berat: currencyFormat(x.Product.berat),
+            harga: currencyFormat(x.harga)
+          };
+          totalBerat += x.Product.berat;
+          cart.push(temp);
+        });
+        let totalOngkir = Math.ceil(totalBerat/1000) * trans.ongkir;
+        let totalAll = trans.total_harga + totalOngkir;
+        res.render('admin-transaction-view', {title: 'View Transaction', transText: trans,
+                    cartText: cart, totalHargaText:currencyFormat(trans.total_harga),
+                  totalOngkirText: currencyFormat(totalOngkir),
+                totalAllText: currencyFormat(totalAll), totalBeratText: currencyFormat(totalBerat) });
+      })
+      .catch((err)=>{
+        res.send(err.message);
       })
   })
 });
@@ -297,5 +323,8 @@ function currencyFormat(value){
   return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 }
 
+function formatDate(value){
+  return moment(value).format('DD/MM/YYYY');
+}
 
 module.exports = router;
