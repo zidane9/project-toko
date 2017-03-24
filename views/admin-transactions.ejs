@@ -10,6 +10,7 @@
         <thead>
           <tr>
             <th>Id</th>
+            <th>Tanggal</th>
             <th>Nama</th>
             <th>Email</th>
             <th>Kota</th>
@@ -24,6 +25,7 @@
           <% for(var i=0;i<transText.length;i++){ %>
             <tr>
               <td><%= transText[i].id %></td>
+                <td><%= transText[i].createdAt %></td>
               <td><%= transText[i].nama %></td>
               <td><%= transText[i].email %></td>
               <td><%= transText[i].kota %></td>
@@ -39,6 +41,7 @@
                 <% } %>
               </td>
               <td>
+                <a href="/admin/transaction/view/<%= transText[i].id %>">View</a>
                 <a href="/admin/transaction/edit/<%= transText[i].id %>">Edit</a>
               </td>
             </tr>
